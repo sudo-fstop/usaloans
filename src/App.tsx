@@ -33,6 +33,7 @@ import { buildExportCsv, downloadCsv } from "./lib/export";
 import { CANONICAL_FIELD_LABELS, FIELD_OPTIONS, suggestMappings } from "./lib/mapping";
 import { buildDataQualityReport, normalizeRows } from "./lib/normalization";
 import { DEFAULT_MARKET_INPUTS, DEFAULT_SCORE_CONFIG, scoreRecords } from "./lib/scoring";
+import PitchPage from "./PitchPage";
 import {
   DataQualityReport,
   FieldMapping,
@@ -195,6 +196,7 @@ const TOUR_STEPS: TourStep[] = [
 ];
 
 export default function App() {
+  const routePath = getRoutePath();
   const [upload, setUpload] = useState<ParsedUpload | null>(null);
   const [mappings, setMappings] = useState<FieldMapping[]>([]);
   const [mappingConfirmed, setMappingConfirmed] = useState(false);
@@ -222,6 +224,10 @@ export default function App() {
   const filtered = useMemo(() => filterAndSort(scored, filters, sort), [filters, scored, sort]);
   const dashboard = useMemo(() => buildDashboard(scored, market), [scored, market]);
   const canScore = Boolean(upload && mappings.length && market.inputsConfirmed);
+
+  if (routePath.startsWith("/usaloans-pitch")) {
+    return <PitchPage />;
+  }
 
   useEffect(() => {
     try {
@@ -1743,4 +1749,13 @@ function round(value: number, decimals = 2) {
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
+}
+
+function getRoutePath() {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const path = window.location.pathname;
+  if (base && path.startsWith(base)) {
+    return path.slice(base.length) || "/";
+  }
+  return path;
 }

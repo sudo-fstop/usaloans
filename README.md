@@ -45,6 +45,8 @@ On pushes to `main`, the workflow:
 
 The Vite `base` path is derived from `GITHUB_REPOSITORY` during GitHub Actions builds, so project Pages URLs like `https://OWNER.github.io/REPO/` work without hardcoding the repo owner.
 
+The Ian Isaacson pitch page is available at `/usaloans-pitch/` after deployment.
+
 ## Compliance Notes
 
 This is an internal marketing-intelligence tool, not an underwriting or automated outbound platform. Estimated savings are for internal prioritization only and are not an offer, quote, or guarantee of savings or eligibility.

@@ -34,3 +34,259 @@ textarea:focus-visible {
 .scrollbar-thin {
   scrollbar-width: thin;
 }
+
+.pitch-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(247, 211, 107, 0.28);
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.pitch-orbit-one {
+  width: min(560px, 86vw);
+  height: min(560px, 86vw);
+  animation: pitch-spin 24s linear infinite;
+}
+
+.pitch-orbit-two {
+  width: min(390px, 62vw);
+  height: min(390px, 62vw);
+  border-color: rgba(230, 244, 237, 0.2);
+  animation: pitch-spin-reverse 18s linear infinite;
+}
+
+.pitch-core {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  display: flex;
+  width: 190px;
+  height: 190px;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+  background: rgba(12, 23, 19, 0.76);
+  box-shadow: 0 0 90px rgba(247, 211, 107, 0.18);
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+  animation: pitch-breathe 4s ease-in-out infinite;
+}
+
+.pitch-signal {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 164px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 12px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+  animation: pitch-float 5.5s ease-in-out infinite;
+}
+
+.pitch-pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background: #f7d36b;
+  box-shadow: 0 0 0 0 rgba(247, 211, 107, 0.72);
+  animation: pitch-pulse 1.8s ease-out infinite;
+}
+
+.pitch-signal-1 {
+  left: 4%;
+  top: 16%;
+}
+
+.pitch-signal-2 {
+  right: 3%;
+  top: 14%;
+  animation-delay: -1.2s;
+}
+
+.pitch-signal-3 {
+  left: 0;
+  top: 48%;
+  animation-delay: -2.3s;
+}
+
+.pitch-signal-4 {
+  right: 0;
+  top: 44%;
+  animation-delay: -3s;
+}
+
+.pitch-signal-5 {
+  left: 10%;
+  bottom: 12%;
+  animation-delay: -0.7s;
+}
+
+.pitch-signal-6 {
+  right: 8%;
+  bottom: 16%;
+  animation-delay: -1.8s;
+}
+
+.pitch-dashboard {
+  position: absolute;
+  right: 7%;
+  bottom: 0;
+  width: min(420px, 86vw);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.09);
+  padding: 16px;
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(18px);
+  animation: pitch-rise 900ms ease both;
+}
+
+.pitch-card {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(247, 211, 107, 0.34);
+  border-radius: 8px;
+  background: rgba(247, 211, 107, 0.12);
+  padding: 12px 14px;
+  color: #f7d36b;
+  font-size: 13px;
+  font-weight: 700;
+  backdrop-filter: blur(12px);
+}
+
+.pitch-card-top {
+  left: 16%;
+  top: 4%;
+  animation: pitch-slide-in-left 850ms ease both 240ms;
+}
+
+.pitch-card-bottom {
+  left: 15%;
+  bottom: 4%;
+  animation: pitch-slide-in-left 850ms ease both 420ms;
+}
+
+@keyframes pitch-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg) scale(1);
+  }
+}
+
+@keyframes pitch-spin-reverse {
+  from {
+    transform: translate(-50%, -50%) rotate(360deg) scale(1);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes pitch-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.035);
+  }
+}
+
+@keyframes pitch-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes pitch-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(247, 211, 107, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 12px rgba(247, 211, 107, 0);
+  }
+}
+
+@keyframes pitch-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pitch-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .pitch-signal,
+  .pitch-card {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .pitch-dashboard {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    margin-top: 18px;
+  }
+
+  .pitch-core,
+  .pitch-orbit {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pitch-orbit,
+  .pitch-core,
+  .pitch-signal,
+  .pitch-pulse,
+  .pitch-dashboard,
+  .pitch-card {
+    animation: none;
+  }
+}
