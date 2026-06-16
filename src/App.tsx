@@ -225,7 +225,7 @@ export default function App() {
   const dashboard = useMemo(() => buildDashboard(scored, market), [scored, market]);
   const canScore = Boolean(upload && mappings.length && market.inputsConfirmed);
 
-  if (routePath.startsWith("/usaloans-pitch")) {
+  if (routePath !== "/app") {
     return <PitchPage />;
   }
 
@@ -1752,12 +1752,15 @@ function clamp(value: number, min: number, max: number) {
 }
 
 function getRoutePath() {
-  const page = new URLSearchParams(window.location.search).get("page");
-  if (page === "ian" || page === "pitch") return "/usaloans-pitch";
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("app") === "refisignal" || params.get("page") === "app") return "/app";
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   const path = window.location.pathname;
   if (base && path.startsWith(base)) {
-    return path.slice(base.length) || "/";
+    const route = path.slice(base.length) || "/";
+    if (route === "/app" || route === "/refisignal") return "/app";
+    return route;
   }
+  if (path === "/app" || path === "/refisignal") return "/app";
   return path;
 }

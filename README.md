@@ -25,6 +25,8 @@ npm run dev
 
 Open the local URL printed by Vite, usually `http://127.0.0.1:5173/`.
 
+The landing page loads at `/`. The working RefiSignal app loads at `/?app=refisignal`.
+
 ## Build
 
 ```bash
@@ -45,7 +47,7 @@ On pushes to `main`, the workflow:
 
 The Vite `base` path is derived from `GITHUB_REPOSITORY` during GitHub Actions builds, so project Pages URLs like `https://OWNER.github.io/REPO/` work without hardcoding the repo owner.
 
-The Ian Isaacson pitch page is available at `/?page=ian` after deployment. The app also includes an SPA fallback for `/usaloans-pitch/`.
+The deployed root URL loads the USAloans pitch page and intro animation. The working app is available at `/?app=refisignal`.
 
 ## Compliance Notes
 

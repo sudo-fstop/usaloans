@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { ArrowRight, CheckCircle2, DollarSign, FileSpreadsheet, Target } from "lucide-react";
 
 const proof = [
@@ -24,15 +25,24 @@ const ideas = [
   "CRM-ready exports so loan officers get cleaner lists with less manual sorting.",
 ];
 
+const introFrames = [
+  { text: "Hi Ian \u{1F44B}", duration: 1400 },
+  { text: "AI has changed the game. Felix is your guide.", duration: 2800 },
+  { text: "We've built an app with the data dictionary.", duration: 2600 },
+  { text: "Not a mockup. Fully working. Yours to Keep.", duration: 2800 },
+  { text: "Enjoy!", duration: 1300 },
+];
+
 export default function PitchPage() {
   return (
     <main className="min-h-screen bg-white text-[#101714]">
+      <IntroOverlay />
       <section className="mx-auto flex min-h-screen max-w-6xl flex-col px-5 py-6 md:px-8">
         <nav className="flex items-center justify-between border-b border-black/10 pb-4">
-          <a className="text-sm font-semibold tracking-wide" href="./?page=ian">
+          <a className="text-sm font-semibold tracking-wide" href="./">
             Sulphur for USAloans
           </a>
-          <a className="rounded border border-black/15 px-3 py-2 text-sm font-medium hover:bg-black/[0.03]" href="./">
+          <a className="rounded border border-black/15 px-3 py-2 text-sm font-medium hover:bg-black/[0.03]" href="./?app=refisignal">
             Open app
           </a>
         </nav>
@@ -47,7 +57,7 @@ export default function PitchPage() {
               RefiSignal is the first proof: a browser-based mortgage intelligence app that turns borrower files into ranked, product-aware outreach lists.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="inline-flex items-center gap-2 rounded bg-[#101714] px-4 py-3 text-sm font-semibold text-white hover:bg-[#355b4d]" href="./">
+              <a className="inline-flex items-center gap-2 rounded bg-[#101714] px-4 py-3 text-sm font-semibold text-white hover:bg-[#355b4d]" href="./?app=refisignal">
                 View RefiSignal
                 <ArrowRight size={16} aria-hidden="true" />
               </a>
@@ -129,5 +139,48 @@ export default function PitchPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+function IntroOverlay() {
+  const [activeFrame, setActiveFrame] = useState(0);
+  const [isClosing, setIsClosing] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+
+  useEffect(() => {
+    const timers: number[] = [];
+    let elapsed = 0;
+
+    introFrames.forEach((frame, index) => {
+      if (index > 0) {
+        timers.push(window.setTimeout(() => setActiveFrame(index), elapsed));
+      }
+      elapsed += frame.duration;
+    });
+
+    timers.push(window.setTimeout(() => setIsClosing(true), elapsed));
+    timers.push(window.setTimeout(() => setIsHidden(true), elapsed + 650));
+
+    return () => {
+      timers.forEach((timer) => window.clearTimeout(timer));
+    };
+  }, []);
+
+  if (isHidden) return null;
+
+  return (
+    <div className={`pitch-intro ${isClosing ? "pitch-intro-exit" : ""}`} role="status" aria-live="polite" aria-label={introFrames[activeFrame].text}>
+      <div className="pitch-intro-stage">
+        {introFrames.map((frame, index) => (
+          <p
+            key={frame.text}
+            className={`pitch-intro-line ${activeFrame === index ? "pitch-intro-line-active" : ""}`}
+            style={{ animationDuration: `${frame.duration}ms` }}
+          >
+            {frame.text}
+          </p>
+        ))}
+      </div>
+    </div>
   );
 }
