@@ -292,7 +292,7 @@ function PitchHero() {
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,8,7,0.98)_0%,rgba(5,8,7,0.86)_42%,rgba(5,8,7,0.38)_100%)]" />
 
       <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between">
-        <a className="flex items-center gap-3" href="./usaloans-pitch/">
+        <a className="flex items-center gap-3" href="./?page=ian">
           <span className="flex h-10 w-10 items-center justify-center rounded bg-[#f7d36b] text-[#17211d]">
             <Sparkles size={20} aria-hidden="true" />
           </span>

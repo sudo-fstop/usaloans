@@ -1752,6 +1752,8 @@ function clamp(value: number, min: number, max: number) {
 }
 
 function getRoutePath() {
+  const page = new URLSearchParams(window.location.search).get("page");
+  if (page === "ian" || page === "pitch") return "/usaloans-pitch";
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   const path = window.location.pathname;
   if (base && path.startsWith(base)) {
